@@ -1,0 +1,95 @@
+body {
+  background-color: #555;
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+.app-container {
+  border-color: none;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.grid-container {
+  width: 450px;
+  margin: 0px auto;
+  box-shadow: 0px 0px 80px #333;
+}
+table {
+  font-size: 16px;
+}
+.tile {
+  width: 50px;
+  height: 50px;
+  border: 1px solid #aaa;
+  cursor: default;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  text-align: center;
+  vertical-align: middle;
+  color: white;
+}
+.covered {
+  background-color: #eee;
+}
+.uncovered {
+  background-color: none;
+}
+.panel-container {
+  /*top: 0;*/
+  left: 0;
+  width: 200px;
+  background-color: #ddd;
+  border-right: 1px solid #555;
+  box-shadow: 2px 0px 10px #333;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.button-view {
+  margin: 10px;
+  padding: 20px;
+  height: 20px;
+  width: 120px;
+  background-color: #444;
+  color: #ccc;
+  border: 1px solid #333;
+  border-radius: 6px;
+  cursor: default;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.button-view:hover {
+  background-color: #333; 
+}
+.button-view:active {
+  background-color: #888;
+  color: #333;
+  border: 1px solid #ddd;
+}
+.mine {
+  color: #ff7777;
+}
+.zero {
+  color: #99ffdd;
+}
+.one {
+  color: #bbff88;
+}
+.two {
+  color: #ffffaa;
+}
+.three {
+  color: #ffdd66;
+}
+.number {
+  color: #ffad00;
+}
