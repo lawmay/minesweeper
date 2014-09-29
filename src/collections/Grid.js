@@ -66,18 +66,17 @@ var Grid = Backbone.Collection.extend({
       }
     }
   },
-  mapAdjacentMines: function(tile, gridSize, callback) {
+  mapAdjacentMines: function(tile, gridSize, callback) {    // Examine all 8 tiles around a certain tile
     var tileRow = tile.get('row');
     var tileColumn = tile.get('column');
     for (var i = -1; i < 2; i++) {
       for (var j = -1; j < 2; j++) {
-
         var currentRowIndex = tileRow + i;
         var currentColumnIndex = tileColumn + j;
 
         if (currentRowIndex >= 0 && currentRowIndex < gridSize &&
           currentColumnIndex >= 0 && currentColumnIndex < gridSize &&
-          !(currentRowIndex === tileRow && currentColumnIndex === tileColumn)
+          !(currentRowIndex === tileRow && currentColumnIndex === tileColumn)   // Skip the center space
           ){
           callback(currentRowIndex, currentColumnIndex);
         }
@@ -123,13 +122,10 @@ var Grid = Backbone.Collection.extend({
   handleButtonClick: function(buttonType, gridSize) {
     if (buttonType === 'validateButton') {
       this.validateGame();
-      
-    }
-    if (buttonType === 'newGameButton') {
+    } else if (buttonType === 'newGameButton') {
       this.resetTiles();
       this.initializeMines(gridSize);
-    }
-    if (buttonType === 'cheatButton') {
+    } else if (buttonType === 'cheatButton') {
       this.showMines();
     }
   },
