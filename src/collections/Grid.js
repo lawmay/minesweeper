@@ -1,22 +1,23 @@
 /**
  *  Grid
  *
- *
+ *  Collection for the grid of tiles.
+ *  Contains game logic.
  */
 
 var Grid = Backbone.Collection.extend({
   model: Tile,
   initialize: function(models, gridSize) {
-    this.setCurrentGrid(models, gridSize);
-    this.initializeMines(gridSize);
+    this.setCurrentGrid(models, gridSize);  // Create a 2d-array containing references to models in the grid
+    this.initializeMines(gridSize); // Randomly generate mines
 
-    this.on('handleTileClicked', function(tile) {
+    this.on('handleTileClicked', function(tile) {   // Handle a tile click
       if (!tile.get('clicked')) {
         this.checkEndGame(tile, gridSize);
       }
     });
   },
-  setCurrentGrid: function(models, gridSize) {
+  setCurrentGrid: function(models, gridSize) {  // Setup 2d-array grid. Logic is easier to with than a flat array of models.
     var currentGrid = [];
 
     for (var i = 0; i < gridSize; i++) {
@@ -30,32 +31,32 @@ var Grid = Backbone.Collection.extend({
       currentGrid.push(currentRow);
     }
 
-    this.currentGrid = currentGrid;
+    this.currentGrid = currentGrid; // Use this.currentGrid to interface with tiles
   },
   initializeMines: function(gridSize) {
     this.setMines();
     this.setAdjacentMines(gridSize);
   },
   setMines: function() {
-    var randomChoices = [];
+    var randomChoices = []; // Create random choices
     for (var i = 0; i < 64; i++) {
       randomChoices.push(i);
     }
 
-    for (var j = 0; j < 10; j++) {
+    for (var j = 0; j < 10; j++) {    // Unbiased random number generator (Fisher-Yates like?)
       var randomIndex = Math.floor(Math.random() * (64 - j));
-      var randomNumber = randomChoices.splice(randomIndex, 1)[0];
+      var randomNumber = randomChoices.splice(randomIndex, 1)[0]; // Pull a random element randomly out remaining possible results
 
-      var randomRowIndex = randomNumber % 8;
-      var randomColumnIndex = Math.floor(randomNumber / 8);
+      var randomRowIndex = Math.floor(randomNumber / 8);
+      var randomColumnIndex = randomNumber % 8;
       this.currentGrid[randomRowIndex][randomColumnIndex].set('mine', true);  
     }
   },
-  setAdjacentMines: function(gridSize) {
+  setAdjacentMines: function(gridSize) {  // Set the number of adjacent mines surrounding a tile
     for (var i = 0; i < gridSize; i++) {
       for (var j = 0; j < gridSize; j++) {
         var count = 0;
-
+        // Use a callback to execute the incrementing
         this.mapAdjacentMines(this.currentGrid[i][j], gridSize, function(currentRowIndex, currentColumnIndex) {
           if (this.currentGrid[currentRowIndex][currentColumnIndex].get('mine')) {
             count++;
@@ -108,11 +109,13 @@ var Grid = Backbone.Collection.extend({
       tile.set('clicked', false);
     });
   },
-  uncoverAppropriateTiles: function(tile, gridSize) {
+  uncoverAppropriateTiles: function(tile, gridSize) { // Uncover all appropriate tiles when a tile is clicked (and not a mine)
     if (tile.get('adjacentMines') === 0 && tile.get('clicked') !== true) {
       tile.set('clicked', true);
 
       this.mapAdjacentMines(tile, gridSize, function(currentRowIndex, currentColumnIndex) {
+        // Call this function recursively in the callback when iterating all surrounding tiles
+        // Will effectively uncover all tiles around the current tile with 0 adjacent mines
         this.uncoverAppropriateTiles(this.currentGrid[currentRowIndex][currentColumnIndex], gridSize);
       }.bind(this));
     } else {
@@ -147,7 +150,7 @@ var Grid = Backbone.Collection.extend({
       }
     });
   },
-  mapAllTiles: function(callback) {
+  mapAllTiles: function(callback) { // Map utility function for all tiles in the board
     _.each(this.currentGrid, function(currentRow) {
       _.each(currentRow, function(tile) {
         callback(tile);

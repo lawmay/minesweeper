@@ -1,7 +1,8 @@
 /**
  *  Panel
  *
- *
+ *  Model for side-panel or options.
+ *  Buttons: Validate, New Game, Cheat
  */
 
 var Panel = Backbone.Model.extend({
@@ -21,6 +22,8 @@ var Panel = Backbone.Model.extend({
       },
     ];
 
+    // For each button in buttons array, create a new button
+    // and attach button click event
     _.each(this.buttons, function(button) {
       this.set(button.type, new Button(button.text));
 

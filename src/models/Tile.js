@@ -1,7 +1,7 @@
 /**
  *  Tile
  *
- *
+ *  Model for one tile on the grid. Tiles exist in the Grid collection.
  */
 
 var Tile = Backbone.Model.extend({
@@ -14,6 +14,6 @@ var Tile = Backbone.Model.extend({
     this.set('warning', 0);
   },
   tileClicked: function() {
-    this.trigger('handleTileClicked', this);
+    this.trigger('handleTileClicked', this);  // Bubble up click event up to the Grid collection
   }
 });

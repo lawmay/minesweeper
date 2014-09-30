@@ -1,7 +1,7 @@
 /**
  *  TileView
  *
- *
+ *  View for the each tile.
  */
 
 var TileView = Backbone.View.extend({
@@ -18,13 +18,13 @@ var TileView = Backbone.View.extend({
   },
   render: function() {
     if (this.model.get('clicked')) {
-      this.$el.removeClass('covered');
+      this.$el.removeClass('covered');  // Reveal tile on click
       this.$el.addClass('uncovered');
 
       if (this.model.get('mine')) {
-        this.$el.html('<div class="mine">mine</div>');
+        this.$el.html('<div class="mine">mine</div>');    // Reveal mine
       } else {
-        var numberColorClasses = [
+        var numberColorClasses = [  // Array of color classes to be applied depending on adjacent mines
           'zero'
           , 'one'
           , 'two'
@@ -35,11 +35,11 @@ var TileView = Backbone.View.extend({
           , 'number'
           , 'number'
         ]
-        var adjacentMines = this.model.get('adjacentMines');
+        var adjacentMines = this.model.get('adjacentMines');  // Reveal appropriate number of adjacent mines
         this.$el.html('<div class="' + numberColorClasses[adjacentMines] + '">' + adjacentMines + '</div>');
       }
     } else {
-      this.$el.html('');
+      this.$el.html('');    // Initialization of tile view
       this.$el.removeClass('uncovered');
       this.$el.addClass('covered');
     }
