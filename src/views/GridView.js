@@ -11,11 +11,9 @@ var GridView = Backbone.View.extend({
     this.gridSize = gridSize;
   },
   render: function() {
-    var gridSize = this.gridSize;
-
     var currentRow;
     this.collection.map(function(tile, index) {
-      if ((index % gridSize) === 0) {   // Create a table row element once every gridSize elements
+      if ((index % this.gridSize) === 0) {   // Create a table row element once every gridSize elements
         currentRow = $('<tr>');
       }
 
