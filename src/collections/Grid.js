@@ -47,8 +47,8 @@ var Grid = Backbone.Collection.extend({
       var randomIndex = Math.floor(Math.random() * (64 - j));
       var randomNumber = randomChoices.splice(randomIndex, 1)[0];
 
-      var randomRowIndex = randomNumber % 8;
-      var randomColumnIndex = Math.floor(randomNumber / 8);
+      var randomRowIndex = Math.floor(randomNumber / 8);
+      var randomColumnIndex = randomNumber % 8;
       this.currentGrid[randomRowIndex][randomColumnIndex].set('mine', true);  
     }
   },
