@@ -1,7 +1,7 @@
 /**
  *  Button
  *
- *
+ *  Model for each button in the side-panel.
  */
 
 var Button = Backbone.Model.extend({

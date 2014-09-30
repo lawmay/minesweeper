@@ -1,7 +1,8 @@
 /**
  *  Grid
  *
- *
+ *  Collection for the grid of tiles.
+ *  Contains game logic.
  */
 
 var Grid = Backbone.Collection.extend({
