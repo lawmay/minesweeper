@@ -24,19 +24,8 @@ var TileView = Backbone.View.extend({
       if (this.model.get('mine')) {
         this.$el.html('<div class="mine">mine</div>');    // Reveal mine
       } else {
-        var numberColorClasses = [  // Array of color classes to be applied depending on adjacent mines
-          'zero'
-          , 'one'
-          , 'two'
-          , 'three'
-          , 'number'
-          , 'number'
-          , 'number'
-          , 'number'
-          , 'number'
-        ]
         var adjacentMines = this.model.get('adjacentMines');  // Reveal appropriate number of adjacent mines
-        this.$el.html('<div class="' + numberColorClasses[adjacentMines] + '">' + adjacentMines + '</div>');
+        this.$el.html('<div class="' + this.getNumberColor(adjacentMines) + '">' + adjacentMines + '</div>');
       }
     } else {
       this.$el.html('');    // Initialization of tile view
@@ -45,5 +34,19 @@ var TileView = Backbone.View.extend({
     }
 
     return this.$el;
+  },
+  getNumberColor: function(adjacentMines) {
+    var numberColorClasses = [  // Array of color classes to be applied depending on adjacent mines
+      'zero'
+      , 'one'
+      , 'two'
+      , 'three'
+      , 'number'
+      , 'number'
+      , 'number'
+      , 'number'
+      , 'number'
+    ];
+    return numberColorClasses[adjacentMines];
   }
 });
