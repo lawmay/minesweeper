@@ -26,9 +26,7 @@ var TileView = Backbone.View.extend({
         this.$el.html('mine');
       } else {
         var adjacentMines = this.model.get('adjacentMines');  // Reveal appropriate number of adjacent mines
-        this.$el.addClass(this.getNumberColor(adjacentMines));
-        this.$el.html(adjacentMines);
-        // this.$el.html('<span class="' + this.getNumberColor(adjacentMines) + '">' + adjacentMines + '</span>');
+        this.$el.html('<div class="' + this.getNumberColor(adjacentMines) + '">' + adjacentMines + '</div>');
       }
     } else {
       this.$el.html('');    // Initialization of tile view
