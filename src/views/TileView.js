@@ -22,10 +22,13 @@ var TileView = Backbone.View.extend({
       this.$el.addClass('uncovered');
 
       if (this.model.get('mine')) {
-        this.$el.html('<div class="mine">mine</div>');    // Reveal mine
+        this.$el.addClass('mine');    // Reveal mine
+        this.$el.html('mine');
       } else {
         var adjacentMines = this.model.get('adjacentMines');  // Reveal appropriate number of adjacent mines
-        this.$el.html('<div class="' + this.getNumberColor(adjacentMines) + '">' + adjacentMines + '</div>');
+        this.$el.addClass(this.getNumberColor(adjacentMines));
+        this.$el.html(adjacentMines);
+        // this.$el.html('<span class="' + this.getNumberColor(adjacentMines) + '">' + adjacentMines + '</span>');
       }
     } else {
       this.$el.html('');    // Initialization of tile view
